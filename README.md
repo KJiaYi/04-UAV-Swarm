@@ -1,13 +1,17 @@
-# 04-UAV-Swarm
-本项目为无人机集群协同巡检系统，基于多智能体强化学习（MADDPG）完成路径规划、避障、任务分配等核心功能，适配 AirSim 仿真环境，支持视频录制与指标评估。
-一、环境配置
-1. 依赖安装
-bash
-运行
+# UAV-Swarm-Patrol: 基于MARL的无人机集群巡检系统
+[![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![AirSim](https://img.shields.io/badge/AirSim-Simulation-green)](https://github.com/microsoft/AirSim)
+[![MADDPG](https://img.shields.io/badge/MARL-MADDPG-orange)](https://arxiv.org/abs/1706.02275)
+
+本项目为课程大作业实现的无人机集群协同巡检系统，基于多智能体强化学习（MADDPG）完成路径规划、避障、任务分配等核心功能，适配AirSim仿真环境，支持视频录制与指标评估。
+
+## 一、环境配置
+### 1. 依赖安装
+```bash
 pip install airsim torch==2.0.1 numpy==1.24.3 opencv-python==4.8.0.74 imageio
 2. AirSim 配置
 下载 AirSim 预编译包并运行AirSimNH.exe；
-替换Documents/AirSim/settings.json：
+替换Documents/AirSim/settings.json为以下内容：
 json
 {
   "SettingsVersion": 1.2,
@@ -20,17 +24,24 @@ json
   "CollisionDetection": { "Enabled": true }
 }
 二、快速开始
-启动AirSimNH.exe，等待场景加载；
-（可选）后台录制视频：python uav_video_recorder.py；
-运行巡检 Demo：python uav_swarm_patrol_demo.py；
-（可选）视频转 GIF：脚本自动完成，或调用video_to_gif_hd()函数。
+启动AirSimNH.exe，等待场景加载完成；
+（可选）后台录制视频：
+bash
+运行
+python uav_video_recorder.py
+运行巡检核心 Demo：
+bash
+运行
+python uav_swarm_patrol_demo.py
+（可选）视频转 GIF：脚本自动完成，或手动调用video_to_gif_hd()函数。
 三、核心功能
-MARL 模型：简化版 MADDPG，支持奖励函数迭代优化
-任务分配：贪心算法分配巡检任务点，保证全覆盖
-路径规划 + 避障：分布式规划路径，碰撞风险高时反向减速
-通信模拟：模拟 10% 丢包 + 0.1 秒通信延迟
-部署与评估：AirSim 集群巡检，自动计算覆盖效率、碰撞率、任务完成时间
-视频录制：适配新旧版 AirSim，录制视频 / GIF
+模块	说明
+MARL 模型	简化版 MADDPG，支持奖励函数迭代优化
+任务分配	贪心算法分配巡检任务点，保证全覆盖
+路径规划 + 避障	分布式规划路径，碰撞风险高时反向减速
+通信模拟	模拟 10% 丢包 + 0.1 秒通信延迟
+部署与评估	AirSim 集群巡检，自动计算覆盖效率、碰撞率、任务完成时间
+视频录制	适配新旧版 AirSim，录制高清视频 / GIF
 四、文件结构
 plaintext
 ├── uav_data_generator.py      # 轨迹数据生成
