@@ -31,7 +31,7 @@
 |库|airsim、numpy、torch、pandas|
 ### 安装运行
 
-1. 安装 AirSim：参考官方指南
+1. 安装 AirSim：参考 [官方指南](https://microsoft.github.io/AirSim/installation/)
 
 2. 安装依赖：`pip install airsim numpy torch pandas`
 
@@ -43,9 +43,10 @@
 
 ## 文件说明
 
-|文件|功能|
+|文件名称|核心功能说明|
 |---|---|
-|uav_communication_sim.py|通信延迟/丢包模拟|
-|uav_swarm_patrol_demo.py|主程序（初始化/巡检/训练）|
-|uav_maddpg_model.py|MADDPG 模型定义|
-|uav_data_generator.py|预训练数据集生成|
+|uav_communication_sim.py|负责无人机集群间的通信过程模拟，核心实现通信延迟（通过休眠机制）和丢包率（随机概率控制）功能，输出各无人机状态的传输结果，为协同决策提供通信层支撑|
+|uav_swarm_patrol_demo.py|项目主程序，整合全流程逻辑：初始化AirSim客户端与无人机（起飞、定高）、生成并分配巡检任务点、加载MADDPG模型执行协同规划、实时检测碰撞与任务覆盖进度、输出巡检评估指标（覆盖率、碰撞次数等）|
+|uav_maddpg_model.py|定义多智能体强化学习（MADDPG）核心模型，包含单无人机对应的Actor网络（输入状态输出动作）和全局共享的Critic网络（评估策略价值），集成优化器与奖励计算逻辑，支持模型训练与参数更新|
+|uav_data_generator.py|生成无人机集群巡检的模拟数据集，包含任务点分布、无人机轨迹、状态动作等数据，整理后保存为CSV格式文件，用于MADDPG模型的预训练与性能优化|
+> （注：文档部分内容可能由 AI 生成）
