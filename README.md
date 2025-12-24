@@ -31,7 +31,7 @@
 |库|airsim、numpy、torch、pandas|
 ### 安装运行
 
-1. 安装 AirSim：参考 [官方指南](https://microsoft.github.io/AirSim/installation/)
+1. 安装 AirSim：参考官方指南
 
 2. 安装依赖：`pip install airsim numpy torch pandas`
 
